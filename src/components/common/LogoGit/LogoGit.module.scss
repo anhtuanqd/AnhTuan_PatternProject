@@ -1,0 +1,13 @@
+.logo {
+  display: flex;
+  font-size: 48px;
+  background-color: black;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 0;
+  height: 120px;
+  i {
+    padding-right: 24px;
+  }
+}

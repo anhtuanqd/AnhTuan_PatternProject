@@ -1,0 +1,71 @@
+.modalDialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  background-color: rgb(0 0 0 / 50%);
+  overflow: scroll;
+}
+
+.openModal {
+  background-color: white;
+  margin-top: 50px;
+  padding: 20px;
+  border-radius: 10px;
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.headerReadME {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #d3cbcb;
+  padding-bottom: 20px;
+  padding-top: 10px;
+
+  h1 {
+    font-weight: 700;
+    font-size: 25px;
+  }
+  i {
+    font-size: 25px;
+    color: grey;
+  }
+}
+
+.bodyReadME {
+  width: 100%;
+  padding: 20px -0;
+  font-size: 20px;
+  overflow-x: auto;
+  pre {
+    overflow-x: scroll;
+  }
+  img {
+    width: 100%;
+  }
+  ul {
+    overflow-x: auto;
+  }
+}
+
+.modal-body {
+  img {
+    width: 100%;
+  }
+}
+
+@media (min-width: 40em) {
+}
+
+@media only screen and (max-width: 40em) {
+  .openModal {
+    flex: 0 0 83.33333%;
+    max-width: 83.33333%;
+    margin-left: 8.33333%;
+  }
+}
