@@ -8,7 +8,10 @@ import ListUser from '../ListUser/ListUser'
 import style from './searchUser.module.scss'
 
 const SearchUser = () => {
-  const [userName, setUsername] = useState('')
+  const [userName, setUsername] = useState(() => {
+    const storageName = JSON.parse(localStorage.getItem('Name'))
+    return storageName || ''
+  })
   const [listUsers, setListUsers] = useState(() => {
     const storageListUser = JSON.parse(localStorage.getItem('ListUser'))
     return storageListUser
@@ -49,8 +52,13 @@ const SearchUser = () => {
   useEffect(() => {
     const jsonListUsers = JSON.stringify(listUsers)
     localStorage.setItem('ListUser', jsonListUsers)
+
+    const jsonName = JSON.stringify(userName)
+    localStorage.setItem('Name', jsonName)
+
     window.addEventListener('beforeunload', function () {
       localStorage.removeItem('ListUser')
+      localStorage.removeItem('Name')
     })
   })
 
