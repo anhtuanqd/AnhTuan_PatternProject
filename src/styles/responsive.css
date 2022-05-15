@@ -140,7 +140,8 @@
 /* Table */
 @media (min-width: 40em) and (max-width: 60em) {
   .wide {
-    width: 644px;
+    /* width: 644px; */
+    overflow: hidden;
   }
 }
 
@@ -401,9 +402,9 @@
 /* > PC low resolution */
 @media (min-width: 60em) and (max-width: 77.4375em) {
   .wide {
-    width: 984px;
+    overflow: hidden;
+    margin: 0 -8px;
   }
-
   .wide .col {
     padding-left: 12px;
     padding-right: 12px;

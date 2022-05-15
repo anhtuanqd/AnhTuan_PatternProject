@@ -39,6 +39,7 @@ $height-header: 120px;
       border: none;
       box-sizing: border-box;
       border-radius: 50px;
+      background-color: #c3b68a;
       transition: width $search-time cubic-bezier(0.68, -0.55, 0.27, 1.55)
         $reset-time;
       &:focus {

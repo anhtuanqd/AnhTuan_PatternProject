@@ -24,17 +24,17 @@
   padding: 50px 20px 40px;
   position: relative;
   vertical-align: top;
-  margin: 10px;
   font-family: 'helvetica', san-serif;
   min-height: 25vh;
   background: #262a2b;
   border: 1px solid #252727;
   text-align: left;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 @media only screen and (max-width: 40em) {
   .tilesWrap_item {
-    width: 95%;
+    width: 100%;
   }
 }
 .tilesWrap_item h2 {

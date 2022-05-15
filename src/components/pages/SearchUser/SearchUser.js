@@ -8,22 +8,20 @@ import ListUser from '../ListUser/ListUser'
 import style from './searchUser.module.scss'
 
 const SearchUser = () => {
-  const [userName, setUsername] = useState(() => {
-    const storageName = JSON.parse(localStorage.getItem('Name'))
-    return storageName || ''
-  })
+  const [userName, setUsername] = useState('')
   const [listUsers, setListUsers] = useState(() => {
     const storageListUser = JSON.parse(localStorage.getItem('ListUser'))
-    return storageListUser
+    return storageListUser?.list || []
   })
   const [page, setPage] = useState(1)
   const [totalData, setTotalData] = useState()
   const [loading, setLoading] = useState(false)
-  const debounceChange = Debounce(userName, 1000)
+  const storageName = JSON.parse(localStorage.getItem('ListUser'))
+  const debounceChange = Debounce(userName || storageName?.name, 1000)
 
   const getData = async (_username) => {
     setLoading(true)
-    let res = await getUserList(_username, page)
+    let res = await getUserList(_username || storageName?.name, page)
     setLoading(false)
     setTotalData(res.total_count)
     let listDataUsers = res?.items?.map((item) => {
@@ -41,24 +39,20 @@ const SearchUser = () => {
   }
 
   useEffect(() => {
-    if (userName) getData(debounceChange)
+    if (debounceChange) getData(debounceChange)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debounceChange, page])
 
   useEffect(() => {
-    setPage(1)
-  }, [userName])
-
-  useEffect(() => {
-    const jsonListUsers = JSON.stringify(listUsers)
+    const jsonListUsers = JSON.stringify({
+      name: storageName?.name || userName,
+      list: listUsers,
+      page: page,
+    })
     localStorage.setItem('ListUser', jsonListUsers)
-
-    const jsonName = JSON.stringify(userName)
-    localStorage.setItem('Name', jsonName)
 
     window.addEventListener('beforeunload', function () {
       localStorage.removeItem('ListUser')
-      localStorage.removeItem('Name')
     })
   })
 
@@ -86,12 +80,13 @@ const SearchUser = () => {
           <div className={style['search-box']}>
             <input
               type="text"
-              className={style['search-box']}
+              // className={style['search-box']}
               placeholder="Search for username..."
               value={userName}
               onChange={(e) => {
                 setUsername(e.target.value)
                 setListUsers([])
+                setPage(1)
               }}
             />
             <button
