@@ -1,10 +1,6 @@
 .container {
-  background-image: url('https://chiase24.com/wp-content/uploads/2022/02/Tong-hop-cac-hinh-anh-background-dep-nhat-21.jpg');
   height: 100%;
   min-height: 100vh;
-  background-repeat: repeat-y;
-  background-size: cover;
-  background-attachment: fixed;
 }
 .container_repo {
   z-index: 0;
@@ -16,7 +12,6 @@
   text-align: center;
   display: flex;
   flex-wrap: wrap;
-  // overflow-x: hidden;
 }
 .tilesWrap_item {
   display: block;

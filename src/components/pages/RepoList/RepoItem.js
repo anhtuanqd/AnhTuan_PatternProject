@@ -17,7 +17,7 @@ const RepoItem = (props) => {
     setOpenReadMe(true)
     await getReadme(nameUser, data.name)
       .then((res) => {
-        setContentReadMe(atob(res.content))
+        setContentReadMe(decodeURIComponent(escape(window.atob(res.content))))
       })
       .catch((err) => {
         setContentReadMe("We can't find README file from this repo!!!")

@@ -41,10 +41,7 @@ export const ListUser = (props) => {
                         <span className={style.card__status}>{item.id}</span>
                       </div>
                     </div>
-                    <p className={style.card__description}>
-                      {/* Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Asperiores, blanditiis? */}
-                    </p>
+                    <p className={style.card__description}></p>
                   </div>
                 </Link>
               </div>

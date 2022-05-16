@@ -8,20 +8,19 @@ import ListUser from '../ListUser/ListUser'
 import style from './searchUser.module.scss'
 
 const SearchUser = () => {
+  const storageList = JSON.parse(localStorage.getItem('Lis'))
   const [userName, setUsername] = useState('')
   const [listUsers, setListUsers] = useState(() => {
-    const storageListUser = JSON.parse(localStorage.getItem('ListUser'))
-    return storageListUser?.list || []
+    return storageList?.list || []
   })
   const [page, setPage] = useState(1)
   const [totalData, setTotalData] = useState()
   const [loading, setLoading] = useState(false)
-  const storageName = JSON.parse(localStorage.getItem('ListUser'))
-  const debounceChange = Debounce(userName || storageName?.name, 1000)
+  const debounceChange = Debounce(userName || storageList?.name, 1000)
 
   const getData = async (_username) => {
     setLoading(true)
-    let res = await getUserList(_username || storageName?.name, page)
+    let res = await getUserList(_username || storageList?.name, page)
     setLoading(false)
     setTotalData(res.total_count)
     let listDataUsers = res?.items?.map((item) => {
@@ -45,14 +44,14 @@ const SearchUser = () => {
 
   useEffect(() => {
     const jsonListUsers = JSON.stringify({
-      name: storageName?.name || userName,
+      name: storageList?.name || userName,
       list: listUsers,
       page: page,
     })
-    localStorage.setItem('ListUser', jsonListUsers)
+    localStorage.setItem('List', jsonListUsers)
 
     window.addEventListener('beforeunload', function () {
-      localStorage.removeItem('ListUser')
+      localStorage.removeItem('List')
     })
   })
 
@@ -94,7 +93,7 @@ const SearchUser = () => {
               onClick={() => {
                 setUsername('')
                 setListUsers([])
-                localStorage.removeItem('ListUser')
+                localStorage.removeItem('List')
               }}
             ></button>
           </div>
@@ -105,6 +104,16 @@ const SearchUser = () => {
           </p>
         )}
         <ListUser total={totalData} data={listUsers} />
+        {totalData === storageList?.list.length && totalData > 0 ? (
+          <div className={style.no_card}>
+            <div className={style.no_card_item}>
+              <h2>Oops !!!</h2>
+              <p>We Couldn't Find The You Were Looking For . Try Again </p>
+            </div>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
       {loading && <Loading />}
     </>
