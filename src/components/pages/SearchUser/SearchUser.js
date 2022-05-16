@@ -51,12 +51,10 @@ const SearchUser = () => {
       total: totalData,
     })
     localStorage.setItem('List', jsonListUsers)
-    window.addEventListener('beforeunload', function () {
+    window.addEventListener('beforeunload', () => {
       localStorage.removeItem('List')
     })
-  })
 
-  useEffect(() => {
     const handleScrollList = () => {
       let body = document.querySelector('body').clientHeight
       let scrollHeight = window.scrollY + window.innerHeight

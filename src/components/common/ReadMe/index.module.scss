@@ -16,6 +16,7 @@
   border-radius: 10px;
   flex: 0 0 100%;
   max-width: 100%;
+  color: black;
 }
 
 .headerReadME {
@@ -34,6 +35,9 @@
   i {
     font-size: 25px;
     color: grey;
+  }
+  .removeTick {
+    cursor: pointer;
   }
 }
 

@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import PropTypes from 'prop-types'
 import { useEffect, useRef } from 'react'
 import ReactMarkdown from 'react-markdown'
@@ -8,7 +9,6 @@ import styled from './index.module.scss'
 const Readme = ({ content, onClick }) => {
   const modal = useRef()
   const remove = useRef()
-
   useEffect(() => {
     const modalCurrent = modal.current
     const removeCurrent = remove.current
@@ -30,7 +30,10 @@ const Readme = ({ content, onClick }) => {
               <div className={styled.openModal}>
                 <div className={styled.headerReadME}>
                   <h1>README</h1>
-                  <i className="fa-solid fa-xmark" ref={remove}></i>
+                  <i
+                    className={clsx('fa-solid fa-xmark', styled.removeTick)}
+                    ref={remove}
+                  ></i>
                 </div>
                 <div className={styled.bodyReadME}>
                   <ReactMarkdown

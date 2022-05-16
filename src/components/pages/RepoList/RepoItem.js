@@ -28,6 +28,13 @@ const RepoItem = (props) => {
     setOpenReadMe(!openReadMe)
   }
 
+  const body = document.querySelector('body')
+  if (openReadMe) {
+    body.style.overflow = 'hidden'
+  } else {
+    body.style.overflow = 'auto'
+  }
+
   return (
     <>
       <div
