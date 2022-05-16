@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { debounce } from 'lodash'
 import { useEffect, useState } from 'react'
 import Loading from '../../common/Loading/Loading'
@@ -14,32 +15,32 @@ const SearchUser = () => {
     return storageList?.list || []
   })
   const [page, setPage] = useState(1)
-  const [totalData, setTotalData] = useState()
+  const [totalData, setTotalData] = useState(() => {
+    return storageList?.total
+  })
   const [loading, setLoading] = useState(false)
   const debounceChange = Debounce(userName || storageList?.name, 1000)
 
-  const getData = async (_username) => {
-    setLoading(true)
-    let res = await getUserList(_username || storageList?.name, page)
-    setLoading(false)
-    setTotalData(res.total_count)
-    let listDataUsers = res?.items?.map((item) => {
-      return {
-        login: item?.login,
-        avatar: item?.avatar_url,
-        id: item?.id,
-      }
-    })
-    if (page === 1) {
-      setListUsers(listDataUsers)
-    } else {
-      setListUsers([...listUsers, ...listDataUsers])
-    }
-  }
-
   useEffect(() => {
+    const getData = async (_username) => {
+      setLoading(true)
+      let res = await getUserList(_username || storageList?.name, page)
+      setLoading(false)
+      setTotalData(res.total_count)
+      let listDataUsers = res?.items?.map((item) => {
+        return {
+          login: item?.login,
+          avatar: item?.avatar_url,
+          id: item?.id,
+        }
+      })
+      if (page === 1) {
+        setListUsers(listDataUsers)
+      } else {
+        setListUsers([...listUsers, ...listDataUsers])
+      }
+    }
     if (debounceChange) getData(debounceChange)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debounceChange, page])
 
   useEffect(() => {
@@ -47,9 +48,9 @@ const SearchUser = () => {
       name: userName || storageList?.name,
       list: listUsers,
       page: page,
+      total: totalData,
     })
     localStorage.setItem('List', jsonListUsers)
-
     window.addEventListener('beforeunload', function () {
       localStorage.removeItem('List')
     })
@@ -64,12 +65,14 @@ const SearchUser = () => {
       }
     }
     const _debounceHandleScroll = debounce(handleScrollList, 1000)
-    window.addEventListener('scroll', _debounceHandleScroll)
 
+    if (totalData !== storageList?.list.length) {
+      window.addEventListener('scroll', _debounceHandleScroll)
+    }
     return () => {
       window.removeEventListener('scroll', _debounceHandleScroll)
     }
-  }, [])
+  })
 
   return (
     <>
@@ -79,7 +82,6 @@ const SearchUser = () => {
           <div className={style['search-box']}>
             <input
               type="text"
-              // className={style['search-box']}
               placeholder="Search for username..."
               value={userName}
               onChange={(e) => {
@@ -104,11 +106,12 @@ const SearchUser = () => {
           </p>
         )}
         <ListUser total={totalData} data={listUsers} />
-        {totalData === storageList?.list.length && totalData > 0 ? (
+        {totalData === storageList?.list.length &&
+        storageList?.list.length > 0 ? (
           <div className={style.no_card}>
             <div className={style.no_card_item}>
               <h2>Oops !!!</h2>
-              <p>We Couldn't Find The You Were Looking For . Try Again </p>
+              <p>Run out of results </p>
             </div>
           </div>
         ) : (
