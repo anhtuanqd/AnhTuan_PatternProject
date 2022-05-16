@@ -8,7 +8,7 @@ import ListUser from '../ListUser/ListUser'
 import style from './searchUser.module.scss'
 
 const SearchUser = () => {
-  const storageList = JSON.parse(localStorage.getItem('Lis'))
+  const storageList = JSON.parse(localStorage.getItem('List'))
   const [userName, setUsername] = useState('')
   const [listUsers, setListUsers] = useState(() => {
     return storageList?.list || []
@@ -44,7 +44,7 @@ const SearchUser = () => {
 
   useEffect(() => {
     const jsonListUsers = JSON.stringify({
-      name: storageList?.name || userName,
+      name: userName || storageList?.name,
       list: listUsers,
       page: page,
     })
