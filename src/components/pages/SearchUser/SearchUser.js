@@ -1,9 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { debounce } from 'lodash'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Loading from '../../common/Loading/Loading'
 import LogoGit from '../../common/LogoGit/LogoGit'
-import { Debounce } from '../../helpers/Debounce/Debouce'
+import { Debounce } from '../../helpers/Debounce/Debounce'
 import { getUserList } from '../../services/GetDataUser'
 import ListUser from '../ListUser/ListUser'
 import style from './searchUser.module.scss'
@@ -24,14 +23,14 @@ const SearchUser = () => {
   useEffect(() => {
     const getData = async (_username) => {
       setLoading(true)
-      let res = await getUserList(_username || storageList?.name, page)
+      const res = await getUserList(_username || storageList?.name, page)
       setLoading(false)
       setTotalData(res.total_count)
-      let listDataUsers = res?.items?.map((item) => {
+      const listDataUsers = res?.items?.map((item) => {
         return {
           login: item?.login,
           avatar: item?.avatar_url,
-          id: item?.id,
+          id: item?.id
         }
       })
       if (page === 1) {
@@ -47,8 +46,8 @@ const SearchUser = () => {
     const jsonListUsers = JSON.stringify({
       name: userName || storageList?.name,
       list: listUsers,
-      page: page,
-      total: totalData,
+      page,
+      total: totalData
     })
     localStorage.setItem('List', jsonListUsers)
     window.addEventListener('beforeunload', () => {
@@ -56,15 +55,15 @@ const SearchUser = () => {
     })
 
     const handleScrollList = () => {
-      let body = document.querySelector('body').clientHeight
-      let scrollHeight = window.scrollY + window.innerHeight
+      const body = document.querySelector('body').clientHeight
+      const scrollHeight = window.scrollY + window.innerHeight
       if (Math.ceil(scrollHeight) >= body) {
         setPage((prev) => prev + 1)
       }
     }
     const _debounceHandleScroll = debounce(handleScrollList, 1000)
 
-    if (totalData !== storageList?.list.length) {
+    if (totalData !== listUsers.length) {
       window.addEventListener('scroll', _debounceHandleScroll)
     }
     return () => {
@@ -104,8 +103,7 @@ const SearchUser = () => {
           </p>
         )}
         <ListUser total={totalData} data={listUsers} />
-        {totalData === storageList?.list.length &&
-        storageList?.list.length > 0 ? (
+        {totalData === listUsers.length && storageList?.list.length > 0 ? (
           <div className={style.no_card}>
             <div className={style.no_card_item}>
               <h2>Oops !!!</h2>

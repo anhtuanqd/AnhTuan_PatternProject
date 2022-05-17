@@ -20,7 +20,6 @@ const RepoList = () => {
       setRepoList(res)
     }
     getDataRepository()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

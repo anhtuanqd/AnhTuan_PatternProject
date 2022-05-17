@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import PropTypes from 'prop-types'
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../../styles/responsive.css'
 import Readme from '../../common/ReadMe/Readme'
 import { getReadme } from '../../services/GetDataUser'
@@ -19,7 +19,7 @@ const RepoItem = (props) => {
       .then((res) => {
         setContentReadMe(decodeURIComponent(escape(window.atob(res.content))))
       })
-      .catch((err) => {
+      .catch(() => {
         setContentReadMe("We can't find README file from this repo!!!")
       })
   }
@@ -28,12 +28,14 @@ const RepoItem = (props) => {
     setOpenReadMe(!openReadMe)
   }
 
-  const body = document.querySelector('body')
-  if (openReadMe) {
-    body.style.overflow = 'hidden'
-  } else {
-    body.style.overflow = 'auto'
-  }
+  useEffect(() => {
+    const body = document.querySelector('body')
+    if (openReadMe) {
+      body.style.overflow = 'hidden'
+    } else {
+      body.style.overflow = 'auto'
+    }
+  }, [openReadMe])
 
   return (
     <>
@@ -59,7 +61,7 @@ const RepoItem = (props) => {
 RepoItem.propTypes = {
   id: PropTypes.number,
   name: PropTypes.string,
-  data: PropTypes.object,
+  data: PropTypes.object
 }
 
 export default RepoItem
