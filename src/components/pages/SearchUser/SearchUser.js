@@ -2,7 +2,8 @@ import { debounce } from 'lodash'
 import React, { useEffect, useState } from 'react'
 import Loading from '../../common/Loading/Loading'
 import LogoGit from '../../common/LogoGit/LogoGit'
-import { Debounce } from '../../helpers/Debounce/Debounce'
+import NoResult from '../../common/NoResult/NoResult'
+import { debounced } from '../../helpers/Debounce/debounce'
 import { getUserList } from '../../services/GetDataUser'
 import ListUser from '../ListUser/ListUser'
 import style from './searchUser.module.scss'
@@ -18,7 +19,7 @@ const SearchUser = () => {
     return storageList?.total
   })
   const [loading, setLoading] = useState(false)
-  const debounceChange = Debounce(userName || storageList?.name, 1000)
+  const debounceChange = debounced(userName || storageList?.name, 1000)
 
   useEffect(() => {
     const getData = async (_username) => {
@@ -103,13 +104,8 @@ const SearchUser = () => {
           </p>
         )}
         <ListUser total={totalData} data={listUsers} />
-        {totalData === listUsers.length && storageList?.list.length > 0 ? (
-          <div className={style.no_card}>
-            <div className={style.no_card_item}>
-              <h2>Oops !!!</h2>
-              <p>Run out of results </p>
-            </div>
-          </div>
+        {totalData === listUsers.length && listUsers.length > 0 ? (
+          <NoResult />
         ) : (
           ''
         )}

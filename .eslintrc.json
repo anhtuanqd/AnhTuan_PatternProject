@@ -12,10 +12,11 @@
     "sourceType": "module"
   },
   "plugins": ["react"],
-  "rules": { "react-hooks/exhaustive-deps": "off" },
+  "rules": { "react-hooks/exhaustive-deps": "off", "multiline-ternary": "off" },
   "settings": {
     "react": {
       "version": "detect"
     }
   }
 }
+

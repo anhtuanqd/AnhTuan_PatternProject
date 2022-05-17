@@ -1,4 +1,5 @@
 import style from './LogoGit.module.scss'
+import React from 'react'
 
 const LogoGit = () => {
   return (

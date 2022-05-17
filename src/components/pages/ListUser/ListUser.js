@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import '../../../styles/responsive.css'
@@ -50,7 +51,9 @@ export const ListUser = (props) => {
             <div className={style.no_card}>
               <div className={style.no_card_item}>
                 <h2>Oops !!!</h2>
-                <p>We Couldn't Find The You Were Looking For . Try Again </p>
+                <p>
+                  We Couldn&apos;t Find The You Were Looking For . Try Again{' '}
+                </p>
               </div>
             </div>
           ) : (
@@ -64,7 +67,7 @@ export const ListUser = (props) => {
 
 ListUser.propTypes = {
   total: PropTypes.number,
-  data: PropTypes.array,
+  data: PropTypes.array
 }
 
 export default ListUser

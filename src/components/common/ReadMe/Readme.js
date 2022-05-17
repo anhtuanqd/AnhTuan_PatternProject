@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import PropTypes from 'prop-types'
-import { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import Modal from '../Modal/Modal'
@@ -36,10 +36,9 @@ const Readme = ({ content, onClick }) => {
                   ></i>
                 </div>
                 <div className={styled.bodyReadME}>
-                  <ReactMarkdown
-                    children={content}
-                    rehypePlugins={[rehypeRaw]}
-                  />
+                  <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                    {content}
+                  </ReactMarkdown>
                 </div>
               </div>
             </div>
@@ -52,7 +51,7 @@ const Readme = ({ content, onClick }) => {
 
 Readme.propTypes = {
   content: PropTypes.string,
-  onClick: PropTypes.func,
+  onClick: PropTypes.func
 }
 
 export default Readme

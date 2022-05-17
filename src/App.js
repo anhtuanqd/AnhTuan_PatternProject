@@ -7,9 +7,10 @@ import ErrorPage from './components/common/ErrorPage/ErrorPage'
 import Toggle from './components/helpers/Theme/toggle'
 import RepoList from './components/pages/RepoList/RepoList'
 import SearchUser from './components/pages/SearchUser/SearchUser'
+import React from 'react'
 import './styles/reset.css'
 
-function App() {
+const App = () => {
   const [theme, toggleTheme] = useDarkMode()
   const themeMode = theme === 'light' ? lightTheme : darkTheme
   return (
