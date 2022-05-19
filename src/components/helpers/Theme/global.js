@@ -10,7 +10,7 @@ export const GlobalStyles = createGlobalStyle`
    body {
     background: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};
-    background-image: ${({ theme }) => theme.backgroundimage};
+    background-image: ${({ theme }) => theme.backgroundImage};
     position: relative;
     background-repeat: round!important;
     background-attachment: fixed;

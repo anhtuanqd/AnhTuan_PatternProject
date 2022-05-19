@@ -8,7 +8,7 @@ import style from './RepoList.module.scss'
 
 const RepoItem = (props) => {
   const { id, data, nameUser } = props
-  const { name, visibility, forks, watchers, language } = data
+  const { name, open_issues: openIssues, forks, watchers, language } = data
 
   const [openReadMe, setOpenReadMe] = useState(false)
   const [contentReadMe, setContentReadMe] = useState('')
@@ -47,7 +47,7 @@ const RepoItem = (props) => {
         <div onClick={handleOpenReadMe} className={style.tilesWrap_item}>
           <h2>{id + 1}</h2>
           <h3>{name}</h3>
-          <p>Open Issues: {visibility}</p>
+          <p>Open Issues: {openIssues}</p>
           <p>Forks: {forks}</p>
           <p>Watchers: {watchers}</p>
           <p>Language: {language || 'No Language'}</p>

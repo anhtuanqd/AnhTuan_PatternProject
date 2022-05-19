@@ -20,5 +20,5 @@
     // "source.fixAll.eslint": true
   },
   "eslint.enable": true,
-  "cSpell.words": ["clsx", "rehype", "xmark"]
+  "cSpell.words": ["apos", "clsx", "Couldn", "rehype", "xmark"]
 }
